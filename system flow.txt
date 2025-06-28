@@ -1,0 +1,36 @@
+        [User Input on Frontend]
+        (actor name + genre)
+                 |
+                 v
+        [JavaScript fetch call]
+          to Flask backend:
+    GET http://localhost:5000/recommend?actor=X&genre=Y
+                 |
+                 v
+        [Flask Backend: app.py]
+           Receives request
+                 |
+                 v
+        Calls -> tmdb.search_movies(actor, genre)
+                 |
+                 v
+       [tmdb.py logic starts here]
+   1. Search actor name → Get Actor ID
+   2. Get genre list → Find Genre ID
+   3. Call TMDb Discover API with:
+          → Actor ID
+          → Genre ID
+          → Sorted by popularity
+                 |
+                 v
+     Return top N (e.g. 5) results
+                 |
+                 v
+     [Flask returns JSON response]
+                 |
+                 v
+     [Frontend JS receives movie list]
+                 |
+                 v
+   [JS dynamically updates HTML UI]
+        → Shows movie titles, etc.
